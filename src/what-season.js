@@ -15,15 +15,8 @@ function getSeason(date) {
   if (!date) {
     return 'Unable to determine the time of year!';
   }
-  if (!(date instanceof Date) || isNaN(date.getTime()) || Object.prototype.toString.call(date) !== '[object Date]') {
+  if (!(date instanceof Date) || Object.getOwnPropertySymbols(new Date()).length !== Object.getOwnPropertySymbols(date).length) {
     throw new Error('Invalid date!');
-  }
-
-  const dateMethods = ['getTime', 'getFullYear', 'getMonth', 'getDate', 'getHours', 'getMinutes', 'getSeconds', 'getMilliseconds'];
-  for (const method of dateMethods) {
-    if (typeof date[method] !== 'function') {
-      throw new Error('Invalid date!');
-    }
   }
 
   let season;
